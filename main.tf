@@ -55,3 +55,16 @@ resource "azurerm_network_security_rule" "ad_udp" {
   resource_group_name         = azurerm_resource_group.test.name
   network_security_group_name = azurerm_network_security_group.workload.name
 }
+resource "azurerm_network_security_rule" "sql" {
+  name                        = "Allow-SQL"
+  priority                    = 120
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "1433"
+  source_address_prefix       = "VirtualNetwork"
+  destination_address_prefix  = "VirtualNetwork"
+  resource_group_name         = azurerm_resource_group.test.name
+  network_security_group_name = azurerm_network_security_group.workload.name
+}
